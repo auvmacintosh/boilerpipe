@@ -33,7 +33,7 @@ public class HTMLHighlightDemo {
   public static void main(String[] args) throws Exception {
     URL url =
         new URL(
-            "http://blog.openshift.com/day-18-boilerpipe-article-extraction-for-java-developers/");
+            "http://estate.caijing.com.cn/20171005/4340348.shtml");
 
     // choose from a set of useful BoilerpipeExtractors...
     final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
@@ -42,8 +42,8 @@ public class HTMLHighlightDemo {
     // final BoilerpipeExtractor extractor = CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
 
     // choose the operation mode (i.e., highlighting or extraction)
-    final HTMLHighlighter hh = HTMLHighlighter.newHighlightingInstance();
-    // final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
+     final HTMLHighlighter hh = HTMLHighlighter.newHighlightingInstance();
+//    final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
 
     PrintWriter out = new PrintWriter("/tmp/highlighted.html", "UTF-8");
     out.println("<base href=\"" + url + "\" >");
