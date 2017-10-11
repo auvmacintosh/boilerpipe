@@ -22,22 +22,22 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
 import com.kohlschutter.boilerpipe.filters.english.NumWordsRulesClassifier;
 
 /**
- * A quite generic full-text extractor solely based upon the number of words per block (the current,
- * the previous and the next block).
+ * A quite generic full-text extractor solely based upon the number of words per
+ * block (the current, the previous and the next block).
  */
 public class NumWordsRulesExtractor extends ExtractorBase {
-  public static final NumWordsRulesExtractor INSTANCE = new NumWordsRulesExtractor();
+	public static final NumWordsRulesExtractor INSTANCE = new NumWordsRulesExtractor();
 
-  /**
-   * Returns the singleton instance for {@link NumWordsRulesExtractor}.
-   */
-  public static NumWordsRulesExtractor getInstance() {
-    return INSTANCE;
-  }
+	/**
+	 * Returns the singleton instance for {@link NumWordsRulesExtractor}.
+	 */
+	public static NumWordsRulesExtractor getInstance() {
+		return INSTANCE;
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
 
-    return NumWordsRulesClassifier.INSTANCE.process(doc);
-  }
+		return NumWordsRulesClassifier.INSTANCE.process(doc);
+	}
 
 }

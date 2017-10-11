@@ -26,23 +26,23 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
  * Marks all blocks as content.
  */
 public final class MarkEverythingContentFilter implements BoilerpipeFilter {
-  public static final MarkEverythingContentFilter INSTANCE = new MarkEverythingContentFilter();
+	public static final MarkEverythingContentFilter INSTANCE = new MarkEverythingContentFilter();
 
-  private MarkEverythingContentFilter() {
-  }
+	private MarkEverythingContentFilter() {
+	}
 
-  public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
 
-    boolean changes = false;
+		boolean changes = false;
 
-    for (TextBlock tb : doc.getTextBlocks()) {
-      if (!tb.isContent()) {
-        tb.setIsContent(true);
-        changes = true;
-      }
-    }
+		for (TextBlock tb : doc.getTextBlocks()) {
+			if (!tb.isContent()) {
+				tb.setIsContent(true);
+				changes = true;
+			}
+		}
 
-    return changes;
+		return changes;
 
-  }
+	}
 }

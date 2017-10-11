@@ -23,37 +23,38 @@ import com.kohlschutter.boilerpipe.document.TextBlock;
 import com.kohlschutter.boilerpipe.document.TextDocument;
 
 /**
- * Keeps only those content blocks which contain at least k full-text words (measured by
- * {@link HeuristicFilterBase#getNumFullTextWords(TextBlock)}). k is 30 by default.
+ * Keeps only those content blocks which contain at least k full-text words
+ * (measured by {@link HeuristicFilterBase#getNumFullTextWords(TextBlock)}). k
+ * is 30 by default.
  */
 public final class MinFulltextWordsFilter extends HeuristicFilterBase implements BoilerpipeFilter {
-  public static final MinFulltextWordsFilter DEFAULT_INSTANCE = new MinFulltextWordsFilter(30);
-  private final int minWords;
+	public static final MinFulltextWordsFilter DEFAULT_INSTANCE = new MinFulltextWordsFilter(30);
+	private final int minWords;
 
-  public static MinFulltextWordsFilter getDefaultInstance() {
-    return DEFAULT_INSTANCE;
-  }
+	public static MinFulltextWordsFilter getDefaultInstance() {
+		return DEFAULT_INSTANCE;
+	}
 
-  public MinFulltextWordsFilter(final int minWords) {
-    this.minWords = minWords;
-  }
+	public MinFulltextWordsFilter(final int minWords) {
+		this.minWords = minWords;
+	}
 
-  public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
 
-    boolean changes = false;
+		boolean changes = false;
 
-    for (TextBlock tb : doc.getTextBlocks()) {
-      if (!tb.isContent()) {
-        continue;
-      }
-      if (getNumFullTextWords(tb) < minWords) {
-        tb.setIsContent(false);
-        changes = true;
-      }
+		for (TextBlock tb : doc.getTextBlocks()) {
+			if (!tb.isContent()) {
+				continue;
+			}
+			if (getNumFullTextWords(tb) < minWords) {
+				tb.setIsContent(false);
+				changes = true;
+			}
 
-    }
+		}
 
-    return changes;
+		return changes;
 
-  }
+	}
 }

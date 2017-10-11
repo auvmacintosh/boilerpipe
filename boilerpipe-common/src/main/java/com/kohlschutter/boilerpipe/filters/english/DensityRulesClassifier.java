@@ -26,85 +26,85 @@ import com.kohlschutter.boilerpipe.document.TextBlock;
 import com.kohlschutter.boilerpipe.document.TextDocument;
 
 /**
- * Classifies {@link TextBlock}s as content/not-content through rules that have been determined
- * using the C4.8 machine learning algorithm, as described in the paper
- * "Boilerplate Detection using Shallow Text Features", particularly using text densities and link
- * densities.
+ * Classifies {@link TextBlock}s as content/not-content through rules that have
+ * been determined using the C4.8 machine learning algorithm, as described in
+ * the paper "Boilerplate Detection using Shallow Text Features", particularly
+ * using text densities and link densities.
  */
 public class DensityRulesClassifier implements BoilerpipeFilter {
-  public static final DensityRulesClassifier INSTANCE = new DensityRulesClassifier();
+	public static final DensityRulesClassifier INSTANCE = new DensityRulesClassifier();
 
-  /**
-   * Returns the singleton instance for RulebasedBoilerpipeClassifier.
-   */
-  public static DensityRulesClassifier getInstance() {
-    return INSTANCE;
-  }
+	/**
+	 * Returns the singleton instance for RulebasedBoilerpipeClassifier.
+	 */
+	public static DensityRulesClassifier getInstance() {
+		return INSTANCE;
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    List<TextBlock> textBlocks = doc.getTextBlocks();
-    boolean hasChanges = false;
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		List<TextBlock> textBlocks = doc.getTextBlocks();
+		boolean hasChanges = false;
 
-    ListIterator<TextBlock> it = textBlocks.listIterator();
-    if (!it.hasNext()) {
-      return false;
-    }
-    TextBlock prevBlock = TextBlock.EMPTY_START;
-    TextBlock currentBlock = it.next();
-    TextBlock nextBlock = it.hasNext() ? it.next() : TextBlock.EMPTY_START;
+		ListIterator<TextBlock> it = textBlocks.listIterator();
+		if (!it.hasNext()) {
+			return false;
+		}
+		TextBlock prevBlock = TextBlock.EMPTY_START;
+		TextBlock currentBlock = it.next();
+		TextBlock nextBlock = it.hasNext() ? it.next() : TextBlock.EMPTY_START;
 
-    hasChanges = classify(prevBlock, currentBlock, nextBlock) | hasChanges;
+		hasChanges = classify(prevBlock, currentBlock, nextBlock) | hasChanges;
 
-    if (nextBlock != TextBlock.EMPTY_START) {
-      while (it.hasNext()) {
-        prevBlock = currentBlock;
-        currentBlock = nextBlock;
-        nextBlock = it.next();
-        hasChanges = classify(prevBlock, currentBlock, nextBlock) | hasChanges;
-      }
-      prevBlock = currentBlock;
-      currentBlock = nextBlock;
-      nextBlock = TextBlock.EMPTY_START;
-      hasChanges = classify(prevBlock, currentBlock, nextBlock) | hasChanges;
-    }
+		if (nextBlock != TextBlock.EMPTY_START) {
+			while (it.hasNext()) {
+				prevBlock = currentBlock;
+				currentBlock = nextBlock;
+				nextBlock = it.next();
+				hasChanges = classify(prevBlock, currentBlock, nextBlock) | hasChanges;
+			}
+			prevBlock = currentBlock;
+			currentBlock = nextBlock;
+			nextBlock = TextBlock.EMPTY_START;
+			hasChanges = classify(prevBlock, currentBlock, nextBlock) | hasChanges;
+		}
 
-    return hasChanges;
-  }
+		return hasChanges;
+	}
 
-  protected boolean classify(final TextBlock prev, final TextBlock curr, final TextBlock next) {
-    final boolean isContent;
+	protected boolean classify(final TextBlock prev, final TextBlock curr, final TextBlock next) {
+		final boolean isContent;
 
-    if (curr.getLinkDensity() <= 0.333333) {
-      if (prev.getLinkDensity() <= 0.555556) {
-        if (curr.getTextDensity() <= 9) {
-          if (next.getTextDensity() <= 10) {
-            if (prev.getTextDensity() <= 4) {
-              isContent = false;
-            } else {
-              isContent = true;
-            }
-          } else {
-            isContent = true;
-          }
-        } else {
-          if (next.getTextDensity() == 0) {
-            isContent = false;
-          } else {
-            isContent = true;
-          }
-        }
-      } else {
-        if (next.getTextDensity() <= 11) {
-          isContent = false;
-        } else {
-          isContent = true;
-        }
-      }
-    } else {
-      isContent = false;
-    }
+		if (curr.getLinkDensity() <= 0.333333) {
+			if (prev.getLinkDensity() <= 0.555556) {
+				if (curr.getTextDensity() <= 9) {
+					if (next.getTextDensity() <= 10) {
+						if (prev.getTextDensity() <= 4) {
+							isContent = false;
+						} else {
+							isContent = true;
+						}
+					} else {
+						isContent = true;
+					}
+				} else {
+					if (next.getTextDensity() == 0) {
+						isContent = false;
+					} else {
+						isContent = true;
+					}
+				}
+			} else {
+				if (next.getTextDensity() <= 11) {
+					isContent = false;
+				} else {
+					isContent = true;
+				}
+			}
+		} else {
+			isContent = false;
+		}
 
-    return curr.setIsContent(isContent);
-  }
+		return curr.setIsContent(isContent);
+	}
 
 }

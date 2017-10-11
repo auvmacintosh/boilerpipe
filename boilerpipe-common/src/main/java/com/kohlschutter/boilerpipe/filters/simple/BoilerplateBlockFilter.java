@@ -27,38 +27,38 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
 import com.kohlschutter.boilerpipe.labels.DefaultLabels;
 
 /**
- * Removes {@link TextBlock}s which have explicitly been marked as "not content".
+ * Removes {@link TextBlock}s which have explicitly been marked as "not
+ * content".
  */
 public final class BoilerplateBlockFilter implements BoilerpipeFilter {
-  public static final BoilerplateBlockFilter INSTANCE = new BoilerplateBlockFilter(null);
-  public static final BoilerplateBlockFilter INSTANCE_KEEP_TITLE = new BoilerplateBlockFilter(
-      DefaultLabels.TITLE);
-  private final String labelToKeep;
+	public static final BoilerplateBlockFilter INSTANCE = new BoilerplateBlockFilter(null);
+	public static final BoilerplateBlockFilter INSTANCE_KEEP_TITLE = new BoilerplateBlockFilter(DefaultLabels.TITLE);
+	private final String labelToKeep;
 
-  /**
-   * Returns the singleton instance for BoilerplateBlockFilter.
-   */
-  public static BoilerplateBlockFilter getInstance() {
-    return INSTANCE;
-  }
+	/**
+	 * Returns the singleton instance for BoilerplateBlockFilter.
+	 */
+	public static BoilerplateBlockFilter getInstance() {
+		return INSTANCE;
+	}
 
-  public BoilerplateBlockFilter(final String labelToKeep) {
-    this.labelToKeep = labelToKeep;
-  }
+	public BoilerplateBlockFilter(final String labelToKeep) {
+		this.labelToKeep = labelToKeep;
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    List<TextBlock> textBlocks = doc.getTextBlocks();
-    boolean hasChanges = false;
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		List<TextBlock> textBlocks = doc.getTextBlocks();
+		boolean hasChanges = false;
 
-    for (Iterator<TextBlock> it = textBlocks.iterator(); it.hasNext();) {
-      TextBlock tb = it.next();
-      if (!tb.isContent() && (labelToKeep == null || !tb.hasLabel(DefaultLabels.TITLE))) {
-        it.remove();
-        hasChanges = true;
-      }
-    }
+		for (Iterator<TextBlock> it = textBlocks.iterator(); it.hasNext();) {
+			TextBlock tb = it.next();
+			if (!tb.isContent() && (labelToKeep == null || !tb.hasLabel(DefaultLabels.TITLE))) {
+				it.remove();
+				hasChanges = true;
+			}
+		}
 
-    return hasChanges;
-  }
+		return hasChanges;
+	}
 
 }

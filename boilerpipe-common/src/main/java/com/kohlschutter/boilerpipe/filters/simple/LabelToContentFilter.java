@@ -26,28 +26,28 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
  * Marks all blocks that contain a given label as "content".
  */
 public final class LabelToContentFilter implements BoilerpipeFilter {
-  private String[] labels;
+	private String[] labels;
 
-  public LabelToContentFilter(final String... label) {
-    this.labels = label;
-  }
+	public LabelToContentFilter(final String... label) {
+		this.labels = label;
+	}
 
-  public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
 
-    boolean changes = false;
+		boolean changes = false;
 
-    BLOCK_LOOP : for (TextBlock tb : doc.getTextBlocks()) {
-      if (!tb.isContent()) {
-        for (String label : labels) {
-          if (tb.hasLabel(label)) {
-            tb.setIsContent(true);
-            changes = true;
-            continue BLOCK_LOOP;
-          }
-        }
-      }
-    }
+		BLOCK_LOOP: for (TextBlock tb : doc.getTextBlocks()) {
+			if (!tb.isContent()) {
+				for (String label : labels) {
+					if (tb.hasLabel(label)) {
+						tb.setIsContent(true);
+						changes = true;
+						continue BLOCK_LOOP;
+					}
+				}
+			}
+		}
 
-    return changes;
-  }
+		return changes;
+	}
 }

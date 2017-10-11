@@ -23,11 +23,11 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
  * A source that returns {@link TextDocument}s.
  */
 public interface BoilerpipeInput {
-  /**
-   * Returns (somehow) a {@link TextDocument}.
-   * 
-   * @return A {@link TextDocument}.
-   * @throws BoilerpipeProcessingException
-   */
-  TextDocument getTextDocument() throws BoilerpipeProcessingException;
+	/**
+	 * Returns (somehow) a {@link TextDocument}.
+	 * 
+	 * @return A {@link TextDocument}.
+	 * @throws BoilerpipeProcessingException
+	 */
+	TextDocument getTextDocument() throws BoilerpipeProcessingException;
 }

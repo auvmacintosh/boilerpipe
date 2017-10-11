@@ -30,25 +30,29 @@ import com.kohlschutter.boilerpipe.sax.ImageExtractor;
  * Demonstrates how to use Boilerpipe to get the images within the main content.
  */
 public final class ImageExtractorDemo {
-  public static void main(String[] args) throws Exception {
-    URL url = new URL("http://www.spiegel.de/wissenschaft/natur/0,1518,789176,00.html");
+	public static void main(String[] args) throws Exception {
+		URL url = new URL("http://www.spiegel.de/wissenschaft/natur/0,1518,789176,00.html");
 
-    // choose from a set of useful BoilerpipeExtractors...
-    final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.DEFAULT_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.CANOLA_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
+		// choose from a set of useful BoilerpipeExtractors...
+		final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
+		// final BoilerpipeExtractor extractor =
+		// CommonExtractors.DEFAULT_EXTRACTOR;
+		// final BoilerpipeExtractor extractor =
+		// CommonExtractors.CANOLA_EXTRACTOR;
+		// final BoilerpipeExtractor extractor =
+		// CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
 
-    final ImageExtractor ie = ImageExtractor.INSTANCE;
+		final ImageExtractor ie = ImageExtractor.INSTANCE;
 
-    List<Image> imgUrls = ie.process(url, extractor);
+		List<Image> imgUrls = ie.process(url, extractor);
 
-    // automatically sorts them by decreasing area, i.e. most probable true positives come first
-    Collections.sort(imgUrls);
+		// automatically sorts them by decreasing area, i.e. most probable true
+		// positives come first
+		Collections.sort(imgUrls);
 
-    for (Image img : imgUrls) {
-      System.out.println("* " + img);
-    }
+		for (Image img : imgUrls) {
+			System.out.println("* " + img);
+		}
 
-  }
+	}
 }

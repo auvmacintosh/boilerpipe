@@ -24,27 +24,26 @@ import com.kohlschutter.boilerpipe.filters.heuristics.BlockProximityFusion;
 import com.kohlschutter.boilerpipe.filters.heuristics.KeepLargestBlockFilter;
 
 /**
- * A full-text extractor which extracts the largest text component of a page. For news articles, it
- * may perform better than the {@link DefaultExtractor}, but usually worse than
- * {@link ArticleExtractor}.
+ * A full-text extractor which extracts the largest text component of a page.
+ * For news articles, it may perform better than the {@link DefaultExtractor},
+ * but usually worse than {@link ArticleExtractor}.
  */
 public final class LargestContentExtractor extends ExtractorBase {
-  public static final LargestContentExtractor INSTANCE = new LargestContentExtractor();
+	public static final LargestContentExtractor INSTANCE = new LargestContentExtractor();
 
-  private LargestContentExtractor() {
-  }
+	private LargestContentExtractor() {
+	}
 
-  /**
-   * Returns the singleton instance for {@link LargestContentExtractor}.
-   */
-  public static LargestContentExtractor getInstance() {
-    return INSTANCE;
-  }
+	/**
+	 * Returns the singleton instance for {@link LargestContentExtractor}.
+	 */
+	public static LargestContentExtractor getInstance() {
+		return INSTANCE;
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    return NumWordsRulesClassifier.INSTANCE.process(doc)
-        | BlockProximityFusion.MAX_DISTANCE_1.process(doc)
-        | KeepLargestBlockFilter.INSTANCE.process(doc);
-  }
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		return NumWordsRulesClassifier.INSTANCE.process(doc) | BlockProximityFusion.MAX_DISTANCE_1.process(doc)
+				| KeepLargestBlockFilter.INSTANCE.process(doc);
+	}
 
 }

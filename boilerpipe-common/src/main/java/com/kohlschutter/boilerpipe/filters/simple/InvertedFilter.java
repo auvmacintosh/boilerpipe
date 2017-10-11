@@ -28,22 +28,22 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
  * Reverts the "isContent" flag for all {@link TextBlock}s
  */
 public final class InvertedFilter implements BoilerpipeFilter {
-  public static final InvertedFilter INSTANCE = new InvertedFilter();
+	public static final InvertedFilter INSTANCE = new InvertedFilter();
 
-  private InvertedFilter() {
-  }
+	private InvertedFilter() {
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
 
-    List<TextBlock> tbs = doc.getTextBlocks();
-    if (tbs.isEmpty()) {
-      return false;
-    }
-    for (TextBlock tb : tbs) {
-      tb.setIsContent(!tb.isContent());
-    }
+		List<TextBlock> tbs = doc.getTextBlocks();
+		if (tbs.isEmpty()) {
+			return false;
+		}
+		for (TextBlock tb : tbs) {
+			tb.setIsContent(!tb.isContent());
+		}
 
-    return true;
-  }
+		return true;
+	}
 
 }

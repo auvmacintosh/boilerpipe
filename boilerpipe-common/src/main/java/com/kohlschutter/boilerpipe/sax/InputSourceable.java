@@ -20,9 +20,9 @@ package com.kohlschutter.boilerpipe.sax;
 import org.xml.sax.InputSource;
 
 /**
- * An InputSourceable can return an arbitrary number of new {@link InputSource}s for a given
- * document.
+ * An InputSourceable can return an arbitrary number of new {@link InputSource}s
+ * for a given document.
  */
 public interface InputSourceable {
-  InputSource toInputSource();
+	InputSource toInputSource();
 }

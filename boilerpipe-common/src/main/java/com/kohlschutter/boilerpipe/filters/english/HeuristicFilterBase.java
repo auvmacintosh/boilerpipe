@@ -24,15 +24,15 @@ import com.kohlschutter.boilerpipe.document.TextBlock;
  */
 abstract class HeuristicFilterBase {
 
-  protected static int getNumFullTextWords(final TextBlock tb) {
-    return getNumFullTextWords(tb, 9);
-  }
+	protected static int getNumFullTextWords(final TextBlock tb) {
+		return getNumFullTextWords(tb, 9);
+	}
 
-  protected static int getNumFullTextWords(final TextBlock tb, float minTextDensity) {
-    if (tb.getTextDensity() >= minTextDensity) {
-      return tb.getNumWords();
-    } else {
-      return 0;
-    }
-  }
+	protected static int getNumFullTextWords(final TextBlock tb, float minTextDensity) {
+		if (tb.getTextDensity() >= minTextDensity) {
+			return tb.getNumWords();
+		} else {
+			return 0;
+		}
+	}
 }

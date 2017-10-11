@@ -25,16 +25,16 @@ import com.kohlschutter.boilerpipe.document.TextBlock;
  */
 public final class ConditionalLabelAction extends LabelAction {
 
-  private final TextBlockCondition condition;
+	private final TextBlockCondition condition;
 
-  public ConditionalLabelAction(TextBlockCondition condition, String... labels) {
-    super(labels);
-    this.condition = condition;
-  }
+	public ConditionalLabelAction(TextBlockCondition condition, String... labels) {
+		super(labels);
+		this.condition = condition;
+	}
 
-  public void addTo(final TextBlock tb) {
-    if (condition.meetsCondition(tb)) {
-      addLabelsTo(tb);
-    }
-  }
+	public void addTo(final TextBlock tb) {
+		if (condition.meetsCondition(tb)) {
+			addLabelsTo(tb);
+		}
+	}
 }

@@ -21,36 +21,40 @@ import java.io.PrintWriter;
 import java.net.URL;
 
 import com.kohlschutter.boilerpipe.BoilerpipeExtractor;
+import com.kohlschutter.boilerpipe.extractors.ArticleExtractor;
 import com.kohlschutter.boilerpipe.extractors.CommonExtractors;
 import com.kohlschutter.boilerpipe.sax.HTMLHighlighter;
 
 /**
- * Demonstrates how to use Boilerpipe to get the main content, highlighted as HTML.
+ * Demonstrates how to use Boilerpipe to get the main content, highlighted as
+ * HTML.
  * 
  * @see Oneliner if you only need the plain text.
  */
 public class HTMLHighlightDemo {
-  public static void main(String[] args) throws Exception {
-    URL url =
-        new URL(
-            "http://estate.caijing.com.cn/20171005/4340348.shtml");
+	public static void main(String[] args) throws Exception {
+		URL url = new URL("http://news.sina.com.cn/o/2017-10-08/doc-ifymrqmq1305461.shtml");
 
-    // choose from a set of useful BoilerpipeExtractors...
-    final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.DEFAULT_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.CANOLA_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
+		// choose from a set of useful BoilerpipeExtractors...
+		// final BoilerpipeExtractor extractor = ArticleExtractor.INSTANCE;
+		final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
+		// final BoilerpipeExtractor extractor =
+		// CommonExtractors.DEFAULT_EXTRACTOR;
+		// final BoilerpipeExtractor extractor =
+		// CommonExtractors.CANOLA_EXTRACTOR;
+		// final BoilerpipeExtractor extractor =
+		// CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
 
-    // choose the operation mode (i.e., highlighting or extraction)
-     final HTMLHighlighter hh = HTMLHighlighter.newHighlightingInstance();
-//    final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
+		// choose the operation mode (i.e., highlighting or extraction)
+		final HTMLHighlighter hh = HTMLHighlighter.newHighlightingInstance();
+		// final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
 
-    PrintWriter out = new PrintWriter("/tmp/highlighted.html", "UTF-8");
-    out.println("<base href=\"" + url + "\" >");
-    out.println("<meta http-equiv=\"Content-Type\" content=\"text-html; charset=utf-8\" />");
-    out.println(hh.process(url, extractor));
-    out.close();
+		PrintWriter out = new PrintWriter("/tmp/highlighted.html", "UTF-8");
+		out.println("<base href=\"" + url + "\" >");
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text-html; charset=utf-8\" />");
+		out.println(hh.process(url, extractor));
+		out.close();
 
-    System.out.println("Now open file:///tmp/highlighted.html in your web browser");
-  }
+		System.out.println("Now open file:///tmp/highlighted.html in your web browser");
+	}
 }

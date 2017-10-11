@@ -26,11 +26,12 @@ import com.kohlschutter.boilerpipe.labels.ConditionalLabelAction;
  * Useful in combination with {@link ConditionalLabelAction}.
  */
 public interface TextBlockCondition {
-  /**
-   * Returns <code>true</code> iff the given {@link TextBlock} tb meets the defined condition.
-   * 
-   * @param tb
-   * @return <code><true</code> iff the condition is met.
-   */
-  boolean meetsCondition(final TextBlock tb);
+	/**
+	 * Returns <code>true</code> iff the given {@link TextBlock} tb meets the
+	 * defined condition.
+	 * 
+	 * @param tb
+	 * @return <code><true</code> iff the condition is met.
+	 */
+	boolean meetsCondition(final TextBlock tb);
 }

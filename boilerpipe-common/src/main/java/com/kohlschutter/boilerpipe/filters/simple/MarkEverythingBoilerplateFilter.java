@@ -26,24 +26,23 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
  * Marks all blocks as boilerplate.
  */
 public final class MarkEverythingBoilerplateFilter implements BoilerpipeFilter {
-  public static final MarkEverythingBoilerplateFilter INSTANCE =
-      new MarkEverythingBoilerplateFilter();
+	public static final MarkEverythingBoilerplateFilter INSTANCE = new MarkEverythingBoilerplateFilter();
 
-  private MarkEverythingBoilerplateFilter() {
-  }
+	private MarkEverythingBoilerplateFilter() {
+	}
 
-  public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
 
-    boolean changes = false;
+		boolean changes = false;
 
-    for (TextBlock tb : doc.getTextBlocks()) {
-      if (tb.isContent()) {
-        tb.setIsContent(false);
-        changes = true;
-      }
-    }
+		for (TextBlock tb : doc.getTextBlocks()) {
+			if (tb.isContent()) {
+				tb.setIsContent(false);
+				changes = true;
+			}
+		}
 
-    return changes;
+		return changes;
 
-  }
+	}
 }

@@ -26,14 +26,14 @@ import com.kohlschutter.boilerpipe.filters.simple.MarkEverythingContentFilter;
  */
 public final class KeepEverythingExtractor extends ExtractorBase {
 
-  public static final KeepEverythingExtractor INSTANCE = new KeepEverythingExtractor();
+	public static final KeepEverythingExtractor INSTANCE = new KeepEverythingExtractor();
 
-  private KeepEverythingExtractor() {
+	private KeepEverythingExtractor() {
 
-  }
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    return MarkEverythingContentFilter.INSTANCE.process(doc);
-  }
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		return MarkEverythingContentFilter.INSTANCE.process(doc);
+	}
 
 }

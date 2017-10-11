@@ -22,23 +22,22 @@ import java.net.URL;
 import com.kohlschutter.boilerpipe.extractors.ArticleExtractor;
 
 /**
- * Demonstrates how to use Boilerpipe to get the main content as plain text. Note: In real-world
- * cases, you'd probably want to download the file first using a fault-tolerant crawler.
+ * Demonstrates how to use Boilerpipe to get the main content as plain text.
+ * Note: In real-world cases, you'd probably want to download the file first
+ * using a fault-tolerant crawler.
  * 
  * @see HTMLHighlightDemo if you need HTML as well.
  */
 public class Oneliner {
-  public static void main(final String[] args) throws Exception {
-    final URL url =
-        new URL(
-            "http://blog.openshift.com/day-18-boilerpipe-article-extraction-for-java-developers/"
-        // "http://www.dn.se/nyheter/vetenskap/annu-godare-choklad-med-hjalp-av-dna-teknik"
-        );
+	public static void main(final String[] args) throws Exception {
+		final URL url = new URL("http://blog.openshift.com/day-18-boilerpipe-article-extraction-for-java-developers/"
+		// "http://www.dn.se/nyheter/vetenskap/annu-godare-choklad-med-hjalp-av-dna-teknik"
+		);
 
-    System.out.println(ArticleExtractor.INSTANCE.getText(url));
+		System.out.println(ArticleExtractor.INSTANCE.getText(url));
 
-    // Also try other extractors!
-    // System.out.println(DefaultExtractor.INSTANCE.getText(url));
-    // System.out.println(CommonExtractors.CANOLA_EXTRACTOR.getText(url));
-  }
+		// Also try other extractors!
+		// System.out.println(DefaultExtractor.INSTANCE.getText(url));
+		// System.out.println(CommonExtractors.CANOLA_EXTRACTOR.getText(url));
+	}
 }

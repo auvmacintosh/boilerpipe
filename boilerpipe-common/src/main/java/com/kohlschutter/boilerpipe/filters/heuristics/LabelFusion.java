@@ -33,55 +33,55 @@ import com.kohlschutter.boilerpipe.labels.DefaultLabels;
  */
 public final class LabelFusion implements BoilerpipeFilter {
 
-  public static final LabelFusion INSTANCE = new LabelFusion();
+	public static final LabelFusion INSTANCE = new LabelFusion();
 
-  /**
-   * Creates a new {@link LabelFusion} instance.
-   */
-  private LabelFusion() {
-  }
+	/**
+	 * Creates a new {@link LabelFusion} instance.
+	 */
+	private LabelFusion() {
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    List<TextBlock> textBlocks = doc.getTextBlocks();
-    if (textBlocks.size() < 2) {
-      return false;
-    }
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		List<TextBlock> textBlocks = doc.getTextBlocks();
+		if (textBlocks.size() < 2) {
+			return false;
+		}
 
-    boolean changes = false;
-    TextBlock prevBlock = textBlocks.get(0);
-    int offset = 1;
+		boolean changes = false;
+		TextBlock prevBlock = textBlocks.get(0);
+		int offset = 1;
 
-    for (Iterator<TextBlock> it = textBlocks.listIterator(offset); it.hasNext();) {
-      TextBlock block = it.next();
+		for (Iterator<TextBlock> it = textBlocks.listIterator(offset); it.hasNext();) {
+			TextBlock block = it.next();
 
-      if (equalLabels(prevBlock.getLabels(), block.getLabels())) {
-        prevBlock.mergeNext(block);
-        it.remove();
-        changes = true;
-      } else {
-        prevBlock = block;
-      }
-    }
+			if (equalLabels(prevBlock.getLabels(), block.getLabels())) {
+				prevBlock.mergeNext(block);
+				it.remove();
+				changes = true;
+			} else {
+				prevBlock = block;
+			}
+		}
 
-    return changes;
-  }
+		return changes;
+	}
 
-  private boolean equalLabels(Set<String> labels, Set<String> labels2) {
-    if (labels == null || labels2 == null) {
-      return false;
-    }
-    return markupLabelsOnly(labels).equals(markupLabelsOnly(labels2));
-  }
+	private boolean equalLabels(Set<String> labels, Set<String> labels2) {
+		if (labels == null || labels2 == null) {
+			return false;
+		}
+		return markupLabelsOnly(labels).equals(markupLabelsOnly(labels2));
+	}
 
-  private Set<String> markupLabelsOnly(final Set<String> set1) {
-    Set<String> set = new HashSet<String>(set1);
-    for (Iterator<String> it = set.iterator(); it.hasNext();) {
-      final String label = it.next();
-      if (!label.startsWith(DefaultLabels.MARKUP_PREFIX)) {
-        it.remove();
-      }
-    }
-    return set;
-  }
+	private Set<String> markupLabelsOnly(final Set<String> set1) {
+		Set<String> set = new HashSet<String>(set1);
+		for (Iterator<String> it = set.iterator(); it.hasNext();) {
+			final String label = it.next();
+			if (!label.startsWith(DefaultLabels.MARKUP_PREFIX)) {
+				it.remove();
+			}
+		}
+		return set;
+	}
 
 }

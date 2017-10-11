@@ -27,31 +27,31 @@ import com.kohlschutter.boilerpipe.labels.DefaultLabels;
  * Marks all blocks that contain a given label as "boilerplate".
  */
 public final class LabelToBoilerplateFilter implements BoilerpipeFilter {
-  public static final LabelToBoilerplateFilter INSTANCE_STRICTLY_NOT_CONTENT =
-      new LabelToBoilerplateFilter(DefaultLabels.STRICTLY_NOT_CONTENT);
+	public static final LabelToBoilerplateFilter INSTANCE_STRICTLY_NOT_CONTENT = new LabelToBoilerplateFilter(
+			DefaultLabels.STRICTLY_NOT_CONTENT);
 
-  private String[] labels;
+	private String[] labels;
 
-  public LabelToBoilerplateFilter(final String... label) {
-    this.labels = label;
-  }
+	public LabelToBoilerplateFilter(final String... label) {
+		this.labels = label;
+	}
 
-  public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(final TextDocument doc) throws BoilerpipeProcessingException {
 
-    boolean changes = false;
+		boolean changes = false;
 
-    BLOCK_LOOP : for (TextBlock tb : doc.getTextBlocks()) {
-      if (tb.isContent()) {
-        for (String label : labels) {
-          if (tb.hasLabel(label)) {
-            tb.setIsContent(false);
-            changes = true;
-            continue BLOCK_LOOP;
-          }
-        }
-      }
-    }
+		BLOCK_LOOP: for (TextBlock tb : doc.getTextBlocks()) {
+			if (tb.isContent()) {
+				for (String label : labels) {
+					if (tb.hasLabel(label)) {
+						tb.setIsContent(false);
+						changes = true;
+						continue BLOCK_LOOP;
+					}
+				}
+			}
+		}
 
-    return changes;
-  }
+		return changes;
+	}
 }

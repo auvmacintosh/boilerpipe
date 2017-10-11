@@ -24,21 +24,21 @@ import com.kohlschutter.boilerpipe.filters.simple.MarkEverythingContentFilter;
 import com.kohlschutter.boilerpipe.filters.simple.MinWordsFilter;
 
 /**
- * A full-text extractor which extracts the largest text component of a page. For news articles, it
- * may perform better than the {@link DefaultExtractor}, but usually worse than
- * {@link ArticleExtractor}.
+ * A full-text extractor which extracts the largest text component of a page.
+ * For news articles, it may perform better than the {@link DefaultExtractor},
+ * but usually worse than {@link ArticleExtractor}.
  */
 public final class KeepEverythingWithMinKWordsExtractor extends ExtractorBase {
 
-  private final MinWordsFilter filter;
+	private final MinWordsFilter filter;
 
-  public KeepEverythingWithMinKWordsExtractor(final int kMin) {
-    this.filter = new MinWordsFilter(kMin);
-  }
+	public KeepEverythingWithMinKWordsExtractor(final int kMin) {
+		this.filter = new MinWordsFilter(kMin);
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    return SimpleBlockFusionProcessor.INSTANCE.process(doc)
-        | MarkEverythingContentFilter.INSTANCE.process(doc) | filter.process(doc);
-  }
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		return SimpleBlockFusionProcessor.INSTANCE.process(doc) | MarkEverythingContentFilter.INSTANCE.process(doc)
+				| filter.process(doc);
+	}
 
 }

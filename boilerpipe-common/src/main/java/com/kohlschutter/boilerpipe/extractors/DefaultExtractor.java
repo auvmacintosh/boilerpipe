@@ -27,21 +27,20 @@ import com.kohlschutter.boilerpipe.filters.heuristics.SimpleBlockFusionProcessor
  * A quite generic full-text extractor.
  */
 public class DefaultExtractor extends ExtractorBase {
-  public static final DefaultExtractor INSTANCE = new DefaultExtractor();
+	public static final DefaultExtractor INSTANCE = new DefaultExtractor();
 
-  /**
-   * Returns the singleton instance for {@link DefaultExtractor}.
-   */
-  public static DefaultExtractor getInstance() {
-    return INSTANCE;
-  }
+	/**
+	 * Returns the singleton instance for {@link DefaultExtractor}.
+	 */
+	public static DefaultExtractor getInstance() {
+		return INSTANCE;
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
 
-    return
+		return
 
-    SimpleBlockFusionProcessor.INSTANCE.process(doc)
-        | BlockProximityFusion.MAX_DISTANCE_1.process(doc)
-        | DensityRulesClassifier.INSTANCE.process(doc);
-  }
+		SimpleBlockFusionProcessor.INSTANCE.process(doc) | BlockProximityFusion.MAX_DISTANCE_1.process(doc)
+				| DensityRulesClassifier.INSTANCE.process(doc);
+	}
 }

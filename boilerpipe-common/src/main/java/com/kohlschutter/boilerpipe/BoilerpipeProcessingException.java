@@ -21,21 +21,21 @@ package com.kohlschutter.boilerpipe;
  * Exception for signaling failure in the processing pipeline.
  */
 public class BoilerpipeProcessingException extends Exception {
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  public BoilerpipeProcessingException() {
-    super();
-  }
+	public BoilerpipeProcessingException() {
+		super();
+	}
 
-  public BoilerpipeProcessingException(String message, Throwable cause) {
-    super(message, cause);
-  }
+	public BoilerpipeProcessingException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-  public BoilerpipeProcessingException(String message) {
-    super(message);
-  }
+	public BoilerpipeProcessingException(String message) {
+		super(message);
+	}
 
-  public BoilerpipeProcessingException(Throwable cause) {
-    super(cause);
-  }
+	public BoilerpipeProcessingException(Throwable cause) {
+		super(cause);
+	}
 }

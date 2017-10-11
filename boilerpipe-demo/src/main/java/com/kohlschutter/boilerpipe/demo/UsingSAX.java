@@ -30,20 +30,18 @@ import com.kohlschutter.boilerpipe.sax.HTMLFetcher;
  * Demonstrates how to use Boilerpipe when working with {@link InputSource}s.
  */
 public class UsingSAX {
-  public static void main(final String[] args) throws Exception {
-    URL url;
-    url =
-        new URL(
-            "http://blog.csdn.net/jollyjumper/article/details/18747121");
+	public static void main(final String[] args) throws Exception {
+		URL url;
+		url = new URL("http://blog.csdn.net/jollyjumper/article/details/18747121");
 
-    final InputSource is = HTMLFetcher.fetch(url).toInputSource();
+		final InputSource is = HTMLFetcher.fetch(url).toInputSource();
 
-    final BoilerpipeSAXInput in = new BoilerpipeSAXInput(is);
-    final TextDocument doc = in.getTextDocument();
+		final BoilerpipeSAXInput in = new BoilerpipeSAXInput(is);
+		final TextDocument doc = in.getTextDocument();
 
-    // You have the choice between different Extractors
+		// You have the choice between different Extractors
 
-    // System.out.println(DefaultExtractor.INSTANCE.getText(doc));
-    System.out.println(ArticleExtractor.INSTANCE.getText(doc));
-  }
+		// System.out.println(DefaultExtractor.INSTANCE.getText(doc));
+		System.out.println(ArticleExtractor.INSTANCE.getText(doc));
+	}
 }

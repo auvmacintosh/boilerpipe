@@ -27,38 +27,38 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
 import com.kohlschutter.boilerpipe.labels.DefaultLabels;
 
 /**
- * Marks trailing headlines ({@link TextBlock}s that have the label {@link DefaultLabels#HEADING})
- * as boilerplate. Trailing means they are marked content and are below any other content block.
+ * Marks trailing headlines ({@link TextBlock}s that have the label
+ * {@link DefaultLabels#HEADING}) as boilerplate. Trailing means they are marked
+ * content and are below any other content block.
  */
 public final class TrailingHeadlineToBoilerplateFilter implements BoilerpipeFilter {
-  public static final TrailingHeadlineToBoilerplateFilter INSTANCE =
-      new TrailingHeadlineToBoilerplateFilter();
+	public static final TrailingHeadlineToBoilerplateFilter INSTANCE = new TrailingHeadlineToBoilerplateFilter();
 
-  /**
-   * Returns the singleton instance for ExpandTitleToContentFilter.
-   */
-  public static TrailingHeadlineToBoilerplateFilter getInstance() {
-    return INSTANCE;
-  }
+	/**
+	 * Returns the singleton instance for ExpandTitleToContentFilter.
+	 */
+	public static TrailingHeadlineToBoilerplateFilter getInstance() {
+		return INSTANCE;
+	}
 
-  public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
-    boolean changes = false;
+	public boolean process(TextDocument doc) throws BoilerpipeProcessingException {
+		boolean changes = false;
 
-    List<TextBlock> list = doc.getTextBlocks();
+		List<TextBlock> list = doc.getTextBlocks();
 
-    for (ListIterator<TextBlock> it = list.listIterator(list.size()); it.hasPrevious();) {
-      TextBlock tb = it.previous();
-      if (tb.isContent()) {
-        if (tb.hasLabel(DefaultLabels.HEADING)) {
-          tb.setIsContent(false);
-          changes = true;
-        } else {
-          break;
-        }
-      }
-    }
+		for (ListIterator<TextBlock> it = list.listIterator(list.size()); it.hasPrevious();) {
+			TextBlock tb = it.previous();
+			if (tb.isContent()) {
+				if (tb.hasLabel(DefaultLabels.HEADING)) {
+					tb.setIsContent(false);
+					changes = true;
+				} else {
+					break;
+				}
+			}
+		}
 
-    return changes;
-  }
+		return changes;
+	}
 
 }

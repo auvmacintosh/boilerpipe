@@ -23,5 +23,5 @@ import com.kohlschutter.boilerpipe.document.TextDocument;
  * Something that can be represented as a {@link TextDocument}.
  */
 public interface BoilerpipeDocumentSource {
-  TextDocument toTextDocument() throws BoilerpipeProcessingException;
+	TextDocument toTextDocument() throws BoilerpipeProcessingException;
 }
